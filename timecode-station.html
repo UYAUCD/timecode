@@ -81,16 +81,11 @@
   .screw.tl{top:12px;left:12px;} .screw.tr{top:12px;right:12px;}
   .screw.bl{bottom:12px;left:12px;} .screw.br{bottom:12px;right:12px;}
 
-  header{padding:4px 6px 20px; border-bottom:1px solid var(--panel-border);}
-  .eyebrow{
-    font-size:11px; letter-spacing:.18em; color:var(--amber);
-    font-weight:600; text-transform:uppercase;
-  }
+  header{padding:2px 6px 10px; border-bottom:1px solid var(--panel-border);}
   h1{
-    margin:4px 0 2px; font-size:clamp(22px,4vw,28px); font-weight:700;
-    letter-spacing:.02em; color:var(--text);
+    margin:0; font-size:13px; font-weight:600;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted);
   }
-  .subtitle{font-size:12.5px; color:var(--text-muted); letter-spacing:.04em;}
 
   .control-row{
     display:flex; flex-wrap:wrap; gap:18px;
@@ -203,13 +198,13 @@
     margin-bottom:6px;
   }
   .laps-head .field-label{ margin-bottom:0; }
-  table.laps{ width:100%; border-collapse:collapse; font-family:var(--font-display); font-size:13px; }
+  table.laps{ width:100%; border-collapse:collapse; font-family:var(--font-display); font-size:18px; }
   table.laps th{
-    text-align:left; font-family:var(--font-ui); font-size:10px; letter-spacing:.1em;
+    text-align:left; font-family:var(--font-ui); font-size:11px; letter-spacing:.1em;
     color:var(--text-faint); text-transform:uppercase; font-weight:600;
-    padding:6px 8px; border-bottom:1px solid var(--panel-border);
+    padding:8px 8px; border-bottom:1px solid var(--panel-border);
   }
-  table.laps td{ padding:7px 8px; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text); }
+  table.laps td{ padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text); }
   table.laps tr:first-child td{ color:var(--amber); }
   .laps-empty{ color:var(--text-faint); font-size:12.5px; padding:14px 8px; text-align:center; }
   .laps-scroll{ max-height:240px; overflow-y:auto; }
@@ -268,9 +263,7 @@
   <div class="screw bl"></div><div class="screw br"></div>
 
   <header>
-    <div class="eyebrow">Precision Frame Counter · DF / NDF Capable</div>
-    <h1>TC-1 タイムコードステーション</h1>
-    <div class="subtitle">ストップウォッチ &amp; タイムコード計算機</div>
+    <h1>Timecode Station</h1>
   </header>
 
   <div class="control-row" id="controlRow">
