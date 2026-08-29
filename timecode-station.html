@@ -88,27 +88,29 @@
   }
 
   .control-row{
-    display:flex; flex-wrap:wrap; gap:18px;
-    align-items:center; justify-content:space-between;
+    display:flex; flex-wrap:wrap; gap:14px 22px;
+    align-items:flex-end; justify-content:flex-start;
     padding:16px 6px; border-bottom:1px solid var(--panel-border);
   }
   .field-label{
     font-size:10.5px; letter-spacing:.14em; color:var(--text-faint);
     text-transform:uppercase; margin-bottom:6px; display:block;
   }
-  .fps-group{display:flex; flex-wrap:wrap; gap:5px;}
-  .fps-btn{
+  .fps-select{
     font-family:var(--font-display);
-    font-size:13px; padding:6px 10px;
-    background:var(--bezel); color:var(--text-muted);
-    border:1px solid var(--panel-border); border-radius:4px;
-    cursor:pointer; transition:color .12s, border-color .12s, background .12s;
+    font-size:15px; padding:8px 30px 8px 12px;
+    background:var(--bezel); color:var(--amber);
+    border:1px solid var(--panel-border); border-radius:5px;
+    cursor:pointer; letter-spacing:.03em;
+    -webkit-appearance:none; appearance:none;
+    background-image:linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+                      linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position: calc(100% - 16px) center, calc(100% - 11px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat:no-repeat;
   }
-  .fps-btn:hover{color:var(--text);}
-  .fps-btn.active{
-    color:var(--amber); border-color:var(--amber); background:var(--amber-dim);
-  }
-  .locked .fps-btn, .locked .df-switch{
+  .fps-select:focus{ outline:none; border-color:var(--amber); }
+  .locked .fps-select, .locked .df-switch{
     pointer-events:none; opacity:.45;
   }
 
@@ -116,6 +118,7 @@
   .df-switch{
     display:flex; align-items:center; gap:10px;
     font-family:var(--font-display); font-size:12px;
+    height:38px;
   }
   .df-switch .lbl{color:var(--text-muted); letter-spacing:.05em;}
   .df-switch .lbl.on{color:var(--amber);}
@@ -177,7 +180,7 @@
   .status-dot.stop{ background:var(--red); }
 
   .transport{ display:flex; gap:10px; justify-content:center; margin-top:18px; }
-  .btn, .fps-btn, .tab-btn, .toggle{ touch-action:manipulation; }
+  .btn, .fps-select, .tab-btn, .toggle{ touch-action:manipulation; }
   .btn{
     font-family:var(--font-ui); font-weight:600; font-size:13px;
     letter-spacing:.08em; text-transform:uppercase;
@@ -269,7 +272,7 @@
   <div class="control-row" id="controlRow">
     <div>
       <span class="field-label">フレームレート</span>
-      <div class="fps-group" id="fpsGroup"></div>
+      <select class="fps-select" id="fpsSelect"></select>
     </div>
     <div class="df-field">
       <span class="field-label">フォーマット</span>
@@ -278,9 +281,9 @@
         <div class="toggle" id="dfToggle"><div class="knob"></div></div>
         <span class="lbl" id="lblDF">DF</span>
       </div>
-      <div class="df-note" id="dfNote"></div>
     </div>
   </div>
+  <div class="df-note" id="dfNote" style="padding:0 6px 12px; border-bottom:1px solid var(--panel-border);"></div>
 
   <nav class="tabs">
     <button class="tab-btn active" data-tab="stopwatch">Stopwatch</button>
@@ -474,28 +477,26 @@
     return {h,m,s,f};
   }
 
-  // ---- UI: fps buttons ----
-  const fpsGroup = document.getElementById("fpsGroup");
+  // ---- UI: fps dropdown ----
+  const fpsSelect = document.getElementById("fpsSelect");
   FPS_KEYS.forEach(key=>{
-    const btn = document.createElement("button");
-    btn.className = "fps-btn" + (key===state.fpsKey ? " active" : "");
-    btn.textContent = key;
-    btn.dataset.key = key;
-    btn.addEventListener("click", ()=>{
-      if (controlsLocked()) return;
-      state.fpsKey = key;
-      if (!FPS_TABLE[key].dfAllowed) state.df = false;
-      refreshFpsUI();
-      renderCalcDefaults();
-      renderStopwatch();
-    });
-    fpsGroup.appendChild(btn);
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = key + " fps";
+    if (key === state.fpsKey) opt.selected = true;
+    fpsSelect.appendChild(opt);
+  });
+  fpsSelect.addEventListener("change", ()=>{
+    if (controlsLocked()){ fpsSelect.value = state.fpsKey; return; }
+    state.fpsKey = fpsSelect.value;
+    if (!FPS_TABLE[state.fpsKey].dfAllowed) state.df = false;
+    refreshFpsUI();
+    renderCalcDefaults();
+    renderStopwatch();
   });
 
   function refreshFpsUI(){
-    [...fpsGroup.children].forEach(b=>{
-      b.classList.toggle("active", b.dataset.key === state.fpsKey);
-    });
+    fpsSelect.value = state.fpsKey;
     const cfg = FPS_TABLE[state.fpsKey];
     const toggle = document.getElementById("dfToggle");
     toggle.classList.toggle("on", state.df);
