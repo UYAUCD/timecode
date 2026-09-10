@@ -2,725 +2,512 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TC-1 タイムコードステーション</title>
-
-<!-- iOS: launch full-screen from Home Screen, no Safari chrome -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIMECODE STATION 2</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="TC-1">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#1a1c1f">
-<link rel="apple-touch-icon" href="data:image/png;base64,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">
-<link rel="icon" href="data:image/png;base64,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">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Chakra+Petch:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TC STATION">
+<meta name="theme-color" content="#14161c">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
 <style>
-  :root{
-    --page-bg:#0b0c0e;
-    --panel-a:#202327;
-    --panel-b:#1a1c1f;
-    --panel-border:#34383e;
-    --metal-hi:#4a4f57;
-    --bezel:#0e0f11;
-    --amber:#ff9f1c;
-    --amber-dim:rgba(255,159,28,.18);
-    --amber-glow:rgba(255,159,28,.55);
-    --red:#ff4d3d;
-    --green:#4ade80;
-    --text:#e7e9ec;
-    --text-muted:#888e97;
-    --text-faint:#5a5f66;
-    --font-display:'Share Tech Mono', monospace;
-    --font-ui:'Chakra Petch', sans-serif;
+  :root {
+    --bg: #14161c;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --panel: #1e222b;
+    --panel2: #262b36;
+    --text: #e8eaf0;
+    --muted: #9aa3b2;
+    --accent: #4fd1a5;
+    --accent2: #6aa9ff;
+    --danger: #ff6b6b;
+    --border: #333a47;
   }
-  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0;padding:0; overscroll-behavior-y:none; height:100%;}
-  body{
-    background:
-      radial-gradient(ellipse at 50% -10%, #1b1d20 0%, var(--page-bg) 60%);
-    color:var(--text);
-    font-family:var(--font-ui);
-    min-height:100vh;
-    min-height:100dvh;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    padding:max(32px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(64px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
-    -webkit-user-select:none;
-    user-select:none;
+  * { box-sizing: border-box; }
+  html { height: -webkit-fill-available; }
+  body {
+    margin: 0;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    padding: calc(24px + var(--safe-top)) 12px calc(24px + var(--safe-bottom));
+    -webkit-user-select: none;
+    user-select: none;
   }
-  input, select{ -webkit-user-select:text; user-select:text; }
-  .rack{
-    width:100%;
-    max-width:660px;
-    position:relative;
-    background:
-      repeating-linear-gradient(180deg, rgba(255,255,255,.015) 0px, rgba(255,255,255,.015) 1px, transparent 1px, transparent 3px),
-      linear-gradient(180deg, var(--panel-a) 0%, var(--panel-b) 100%);
-    border:1px solid var(--panel-border);
-    border-radius:8px;
-    box-shadow:
-      0 30px 60px -20px rgba(0,0,0,.7),
-      inset 0 1px 0 rgba(255,255,255,.04);
-    padding:26px 26px 18px;
+  input { -webkit-user-select: text; user-select: text; }
+  @media (max-width: 420px) {
+    .panel { padding: 14px; }
+    button { min-width: 84px; padding: 12px 16px; }
+    .keypad { grid-template-columns: repeat(6, 1fr); gap: 6px; }
+    .keypad button { padding: 12px 0; font-size: 16px; min-width: 0; }
   }
-  .screw{
-    position:absolute;
-    width:11px;height:11px;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #6b7078, #2a2d31 70%);
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.08);
+  .wrap { width: 100%; max-width: 760px; }
+  header.title { text-align: center; margin: 0 0 20px; }
+  h1 {
+    font-size: clamp(22px, 5.5vw, 36px);
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin: 0;
+    background: linear-gradient(90deg, #4fd1a5 0%, #6aa9ff 55%, #b48aff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 14px rgba(79, 209, 165, .28));
   }
-  .screw::after{
-    content:"";
-    position:absolute;top:50%;left:50%;
-    width:7px;height:1px;background:#1a1b1d;
-    transform:translate(-50%,-50%) rotate(35deg);
+  h1 .ver {
+    margin-left: 0.25em;
+    -webkit-text-fill-color: transparent; /* タイトルと同じグラデーションを共有 */
   }
-  .screw.tl{top:12px;left:12px;} .screw.tr{top:12px;right:12px;}
-  .screw.bl{bottom:12px;left:12px;} .screw.br{bottom:12px;right:12px;}
-
-  header{padding:6px 0 12px; border-bottom:1px solid var(--panel-border); overflow:hidden; text-align:center;}
-  h1{
-    margin:0; font-size:clamp(22px, 9vw, 40px); font-weight:800;
-    letter-spacing:-.01em; text-transform:uppercase; line-height:1;
-    transform:scaleX(.8); transform-origin:center center;
-    display:inline-block; white-space:nowrap;
-    background:linear-gradient(90deg,#ffe08a 0%,#ff8a1e 45%,#ff2d55 100%);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    filter:drop-shadow(0 0 14px rgba(255,90,30,.55));
+  header.title .sub {
+    display: block;
+    margin-top: 7px;
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: var(--muted);
+  }
+  header.title .rule {
+    width: 220px; max-width: 70%;
+    height: 1px;
+    margin: 12px auto 0;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
   }
 
-  .control-row{
-    display:flex; flex-wrap:nowrap; gap:12px;
-    align-items:flex-end; justify-content:flex-start;
-    padding:16px 6px; border-bottom:1px solid var(--panel-border);
-  }
-  .field-label{
-    font-size:10.5px; letter-spacing:.14em; color:var(--text-faint);
-    text-transform:uppercase; margin-bottom:6px; display:block;
-    white-space:nowrap;
-  }
-  .fps-select{
-    font-family:var(--font-display);
-    font-size:14px; padding:8px 24px 8px 10px;
-    background:var(--bezel); color:var(--amber);
-    border:1px solid var(--panel-border); border-radius:5px;
-    cursor:pointer; letter-spacing:.02em;
-    -webkit-appearance:none; appearance:none;
-    background-image:linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
-                      linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
-    background-position: calc(100% - 12px) center, calc(100% - 7px) center;
-    background-size: 5px 5px, 5px 5px;
-    background-repeat:no-repeat;
-    width:auto; max-width:110px;
-  }
-  .fps-select:focus{ outline:none; border-color:var(--amber); }
-  .locked .fps-select, .locked .df-switch{
-    pointer-events:none; opacity:.45;
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
   }
 
-  .df-field{display:flex; flex-direction:column; align-items:flex-start; flex-shrink:0;}
-  .df-switch{
-    display:flex; align-items:center; gap:10px;
-    font-family:var(--font-display); font-size:12px;
-    height:38px;
+  /* ストップウォッチ */
+  .tc-display {
+    font-size: clamp(32px, 11vw, 72px);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+    padding: 18px 8px;
+    background: var(--panel2);
+    border-radius: 10px;
+    border: 1px solid var(--border);
   }
-  .df-switch .lbl{color:var(--text-muted); letter-spacing:.05em;}
-  .df-switch .lbl.on{color:var(--amber);}
-  .toggle{
-    width:44px; height:22px; border-radius:11px;
-    background:var(--bezel); border:1px solid var(--panel-border);
-    position:relative; cursor:pointer;
-  }
-  .toggle .knob{
-    position:absolute; top:2px; left:2px;
-    width:16px; height:16px; border-radius:50%;
-    background:linear-gradient(180deg,#c7cbd1,#8b9096);
-    transition:transform .16s ease;
-    box-shadow:0 1px 2px rgba(0,0,0,.5);
-  }
-  .toggle.on{border-color:var(--amber);}
-  .toggle.on .knob{ transform:translateX(22px); background:linear-gradient(180deg,#ffd08a,var(--amber)); }
-  .toggle.disabled{opacity:.35; cursor:not-allowed;}
-  .df-note{font-size:10.5px; color:var(--text-faint); margin-top:6px;}
+  .tc-display .frames { color: var(--accent); }
+  .tc-display.running { text-shadow: 0 0 24px rgba(79, 209, 165, .35); }
 
-  nav.tabs{display:flex; gap:6px; padding:16px 6px 0;}
-  .tab-btn{
-    flex:1; font-family:var(--font-ui); font-weight:600; font-size:13px;
-    letter-spacing:.08em; text-transform:uppercase;
-    padding:10px 8px; background:var(--bezel); color:var(--text-muted);
-    border:1px solid var(--panel-border); border-bottom:none;
-    border-radius:6px 6px 0 0; cursor:pointer;
+  .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--text);
+    cursor: pointer;
+    transition: filter .15s, transform .05s;
+    min-width: 110px;
   }
-  .tab-btn.active{ color:var(--amber); background:var(--panel-b); border-color:var(--amber); }
+  button:hover { filter: brightness(1.2); }
+  button:active { transform: scale(.97); }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+  button.primary { background: var(--accent); color: #10241d; font-weight: 700; border-color: transparent; }
+  button.danger  { background: var(--danger); color: #2b1111; font-weight: 700; border-color: transparent; }
+  button.secondary { min-width: 60px; padding: 12px 14px; }
 
-  .view{ display:none; padding:22px 6px 8px; }
-  .view.active{ display:block; }
-
-  .led-bezel{
-    background:var(--bezel);
-    border:1px solid var(--panel-border);
-    border-radius:8px;
-    padding:22px 10px;
-    box-shadow:inset 0 2px 10px rgba(0,0,0,.7);
-    display:flex; align-items:center; justify-content:center;
+  .opts {
+    display: flex; gap: 14px; align-items: center; justify-content: center;
+    margin-top: 14px; color: var(--muted); font-size: 13px; flex-wrap: wrap;
   }
-  .led-digits{
-    font-family:var(--font-display);
-    font-size:clamp(30px,8vw,54px);
-    letter-spacing:.06em;
-    color:var(--amber);
-    text-shadow:0 0 10px var(--amber-glow), 0 0 2px var(--amber-glow);
-    white-space:nowrap;
-  }
-  .led-digits .sep{ color:#c97c14; opacity:.9; }
-
-  .status-row{
-    display:flex; align-items:center; justify-content:center; gap:8px;
-    margin:12px 0 4px; font-family:var(--font-display); font-size:11.5px;
-    letter-spacing:.12em; color:var(--text-muted);
-  }
-  .status-dot{ width:8px; height:8px; border-radius:50%; background:var(--text-faint); }
-  .status-dot.run{ background:var(--green); box-shadow:0 0 8px var(--green); }
-  .status-dot.stop{ background:var(--red); }
-
-  .transport{ display:flex; gap:10px; justify-content:center; margin-top:18px; }
-  .btn, .fps-select, .tab-btn, .toggle{ touch-action:manipulation; }
-  .btn{
-    font-family:var(--font-ui); font-weight:600; font-size:13px;
-    letter-spacing:.08em; text-transform:uppercase;
-    padding:12px 22px; border-radius:6px; cursor:pointer;
-    border:1px solid var(--panel-border); background:var(--bezel); color:var(--text);
-    transition:transform .06s ease, border-color .12s;
-    min-width:110px;
-  }
-  .btn:active{ transform:translateY(1px); }
-  .btn:disabled{ opacity:.35; cursor:not-allowed; }
-  .btn-go{ border-color:var(--green); color:var(--green); }
-  .btn-stop{ border-color:var(--red); color:var(--red); }
-  .btn-amber{ border-color:var(--amber); color:var(--amber); }
-
-  .laps-wrap{ margin-top:22px; }
-  .laps-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-bottom:6px;
-  }
-  .laps-head .field-label{ margin-bottom:0; }
-  table.laps{ width:100%; border-collapse:collapse; font-family:var(--font-display); font-size:18px; }
-  table.laps th{
-    text-align:left; font-family:var(--font-ui); font-size:11px; letter-spacing:.1em;
-    color:var(--text-faint); text-transform:uppercase; font-weight:600;
-    padding:8px 8px; border-bottom:1px solid var(--panel-border);
-  }
-  table.laps td{ padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text); }
-  table.laps tr:first-child td{ color:var(--amber); }
-  .laps-empty{ color:var(--text-faint); font-size:12.5px; padding:14px 8px; text-align:center; }
-  .laps-scroll{ max-height:240px; overflow-y:auto; }
-
-  .calc-section{ margin-bottom:26px; }
-  .calc-section h2{
-    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--text-faint); margin:0 0 12px; font-weight:600;
-  }
-  .calc-row{ display:flex; align-items:flex-end; gap:10px; flex-wrap:wrap; }
-  .tc-field{ display:flex; flex-direction:column; }
-  input.tc-input, input.num-input{
-    font-family:var(--font-display); font-size:16px;
-    background:var(--bezel); color:var(--amber);
-    border:1px solid var(--panel-border); border-radius:5px;
-    padding:9px 10px; width:150px; letter-spacing:.05em;
-    text-shadow:0 0 6px var(--amber-glow);
-  }
-  input.num-input{ width:110px; }
-  input.tc-input:focus, input.num-input:focus{ outline:none; border-color:var(--amber); }
-  select.op-select{
-    font-family:var(--font-display); font-size:16px;
-    background:var(--bezel); color:var(--text); border:1px solid var(--panel-border);
-    border-radius:5px; padding:9px 8px;
-  }
-  .calc-result{
-    margin-top:14px; background:var(--bezel); border:1px solid var(--panel-border);
-    border-radius:6px; padding:14px 16px;
-  }
-  .calc-result .r-label{ font-size:10px; letter-spacing:.12em; color:var(--text-faint); text-transform:uppercase;}
-  .calc-result .r-value{
-    font-family:var(--font-display); font-size:24px; color:var(--amber);
-    text-shadow:0 0 8px var(--amber-glow); margin-top:4px;
-  }
-  .calc-result .r-sub{ font-size:11.5px; color:var(--text-muted); margin-top:6px; font-family:var(--font-display); }
-
-  footer{
-    margin-top:22px; padding-top:12px; border-top:1px solid var(--panel-border);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px;
-    font-family:var(--font-display); font-size:10.5px; color:var(--text-faint); letter-spacing:.05em;
+  select {
+    font-family: inherit; background: var(--panel2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px;
   }
 
-  @media (max-width:480px){
-    .transport .btn{ min-width:0; flex:1; }
-    .transport{ width:100%; }
+  /* ラップ */
+  .laps { margin-top: 14px; max-height: 180px; overflow-y: auto; }
+  .lap {
+    display: flex; justify-content: space-between; gap: 10px;
+    padding: 6px 10px; font-size: 14px; color: var(--muted);
+    border-bottom: 1px solid var(--border);
   }
-  @media (prefers-reduced-motion: reduce){
-    *{ transition:none !important; }
+  .lap b { color: var(--text); font-weight: 600; }
+  .lap .split { color: var(--accent2); }
+
+  /* 電卓 */
+  .calc-note { color: var(--muted); font-size: 12px; margin: 0 0 12px; line-height: 1.7; }
+  .calc-note code { color: var(--accent2); background: var(--panel2); padding: 1px 5px; border-radius: 4px; }
+  #calcDisplay {
+    width: 100%;
+    font-family: inherit;
+    font-size: 20px;
+    text-align: right;
+    padding: 12px 14px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
   }
+  .keypad {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .keypad button { min-width: 0; padding: 14px 0; font-size: 17px; }
+  .keypad .op { color: var(--accent2); font-weight: 700; }
+  .keypad .eq { background: var(--accent); color: #10241d; font-weight: 700; }
+  .keypad .clear { color: var(--danger); }
+  .calc-history {
+    margin-top: 12px; max-height: 150px; overflow-y: auto;
+    font-size: 13px; color: var(--muted);
+  }
+  .calc-history div { padding: 4px 8px; border-bottom: 1px solid var(--border); }
+  .calc-history b { color: var(--accent); font-weight: 600; }
+
+  footer { text-align: center; color: var(--muted); font-size: 11px; margin-top: 8px; }
 </style>
 </head>
 <body>
-<div class="rack">
-  <div class="screw tl"></div><div class="screw tr"></div>
-  <div class="screw bl"></div><div class="screw br"></div>
-
-  <header>
-    <h1>Timecode Station</h1>
+<div class="wrap">
+  <header class="title">
+    <h1>TIMECODE STATION<span class="ver">Ⅱ</span></h1>
+    <span class="sub">STOPWATCH × TIMECODE CALCULATOR</span>
+    <div class="rule"></div>
   </header>
 
-  <div class="control-row" id="controlRow">
-    <div>
-      <span class="field-label">フレームレート</span>
-      <select class="fps-select" id="fpsSelect"></select>
+  <!-- ストップウォッチ -->
+  <div class="panel">
+    <div class="tc-display" id="display">00:00:00<span class="frames">:00</span></div>
+    <div class="row" style="margin-top:14px;">
+      <button class="primary" id="startBtn">スタート</button>
+      <button id="lapBtn" disabled>ラップ</button>
+      <button class="danger" id="resetBtn" disabled>リセット</button>
     </div>
-    <div class="df-field">
-      <span class="field-label">フォーマット</span>
-      <div class="df-switch">
-        <span class="lbl" id="lblNDF">NDF</span>
-        <div class="toggle" id="dfToggle"><div class="knob"></div></div>
-        <span class="lbl" id="lblDF">DF</span>
-      </div>
-    </div>
-  </div>
-  <div class="df-note" id="dfNote" style="padding:0 6px 12px; border-bottom:1px solid var(--panel-border);"></div>
-
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="stopwatch">Stopwatch</button>
-    <button class="tab-btn" data-tab="calc">Calculator</button>
-  </nav>
-
-  <!-- STOPWATCH -->
-  <section class="view active" id="view-stopwatch">
-    <div class="led-bezel">
-      <div class="led-digits" id="swDisplay">00:00:00:00</div>
-    </div>
-    <div class="status-row">
-      <span class="status-dot stop" id="statusDot"></span>
-      <span id="statusText">STOPPED</span>
-      <span style="opacity:.5">·</span>
-      <span id="statusFps">29.97 fps DF</span>
-    </div>
-    <div class="transport">
-      <button class="btn btn-amber" id="btnLeft">LAP</button>
-      <button class="btn btn-go" id="btnRight">START</button>
-    </div>
-
-    <div class="laps-wrap">
-      <div class="laps-head">
-        <span class="field-label">ラップログ</span>
-        <span class="field-label" id="lapCount">0 laps</span>
-      </div>
-      <div class="laps-scroll">
-        <table class="laps" id="lapsTable">
-          <thead><tr><th>#</th><th>Lap TC</th><th>Split</th></tr></thead>
-          <tbody id="lapsBody"></tbody>
-        </table>
-        <div class="laps-empty" id="lapsEmpty">まだラップが記録されていません</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CALCULATOR -->
-  <section class="view" id="view-calc">
-    <div class="calc-section">
-      <h2>タイムコード加算・減算</h2>
-      <div class="calc-row">
-        <div class="tc-field">
-          <span class="field-label">TC A</span>
-          <input class="tc-input" id="tcA" value="00:00:00:00" placeholder="00:00:00:00">
-        </div>
-        <select class="op-select" id="opSelect">
-          <option value="+">+</option>
-          <option value="-">−</option>
+    <div class="opts">
+      <label>フレームレート:
+        <select id="fpsSelect">
+          <option value="24">24 fps</option>
+          <option value="25">25 fps</option>
+          <option value="30">30 fps</option>
+          <option value="29.97" selected>29.97 fps (drop frame)</option>
+          <option value="60">60 fps</option>
         </select>
-        <div class="tc-field">
-          <span class="field-label">TC B</span>
-          <input class="tc-input" id="tcB" value="00:00:00:00" placeholder="00:00:00:00">
-        </div>
-        <button class="btn btn-amber" id="btnCalc">= 計算</button>
-      </div>
-      <div class="calc-result">
-        <div class="r-label">Result</div>
-        <div class="r-value" id="calcResultTC">00:00:00:00</div>
-        <div class="r-sub" id="calcResultSub">0 frames · 0.000s</div>
-      </div>
+      </label>
+      <label><input type="checkbox" id="dropCheck" checked> DF (ドロップフレーム)</label>
     </div>
+    <div class="laps" id="laps"></div>
+  </div>
 
-    <div class="calc-section">
-      <h2>フレーム数 → タイムコード</h2>
-      <div class="calc-row">
-        <div class="tc-field">
-          <span class="field-label">フレーム数</span>
-          <input class="num-input" id="framesIn" type="number" min="0" value="0">
-        </div>
-        <button class="btn btn-amber" id="btnF2T">変換</button>
-      </div>
-      <div class="calc-result">
-        <div class="r-label">Timecode</div>
-        <div class="r-value" id="f2tResult">00:00:00:00</div>
-      </div>
-    </div>
+  <!-- 電卓 -->
+  <div class="panel">
+    <input id="calcDisplay" type="text" spellcheck="false" autocomplete="off" inputmode="none" placeholder="00:01:30:00 + 45s × 2">
+    <div class="keypad" id="keypad"></div>
+    <div class="calc-history" id="calcHistory"></div>
+  </div>
 
-    <div class="calc-section">
-      <h2>タイムコード → フレーム数</h2>
-      <div class="calc-row">
-        <div class="tc-field">
-          <span class="field-label">タイムコード</span>
-          <input class="tc-input" id="tcIn" value="00:00:00:00" placeholder="00:00:00:00">
-        </div>
-        <button class="btn btn-amber" id="btnT2F">変換</button>
-      </div>
-      <div class="calc-result">
-        <div class="r-label">Frames</div>
-        <div class="r-value" id="t2fResult">0</div>
-        <div class="r-sub" id="t2fSub">実時間 0.000s</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <span>MODEL TC-1 · SMPTE 12M DF/NDF</span>
-    <span id="footFps">29.97 fps · DROP FRAME</span>
-  </footer>
+  <footer>フレームは内部で高精度 (performance.now) に計算しています</footer>
 </div>
 
 <script>
-(function(){
-  "use strict";
+"use strict";
 
-  const FPS_TABLE = {
-    "23.976": { exact: 24000/1001, round: 24, dfAllowed: false },
-    "24":     { exact: 24,          round: 24, dfAllowed: false },
-    "25":     { exact: 25,          round: 25, dfAllowed: false },
-    "29.97":  { exact: 30000/1001,  round: 30, dfAllowed: true  },
-    "30":     { exact: 30,          round: 30, dfAllowed: false },
-    "50":     { exact: 50,          round: 50, dfAllowed: false },
-    "59.94":  { exact: 60000/1001,  round: 60, dfAllowed: true  },
-    "60":     { exact: 60,          round: 60, dfAllowed: false }
-  };
-  const FPS_KEYS = ["23.976","24","25","29.97","30","50","59.94","60"];
+/* ===================== タイムコード変換 ===================== */
 
-  const state = {
-    fpsKey: "29.97",
-    df: true
-  };
+function fpsInfo() {
+  const fps = parseFloat(document.getElementById("fpsSelect").value);
+  const df = document.getElementById("dropCheck").value !== undefined && document.getElementById("dropCheck").checked && fps === 29.97;
+  return { fps, nominal: fps === 29.97 ? 30 : fps, drop: df };
+}
 
-  const pad2 = n => String(Math.trunc(n)).padStart(2,"0");
+// ドロップフレーム: 毎分 2フレーム除外 (ただし 10分ごと)
+// DF秒 → 経過フレーム数
+// --- SMPTE ドロップフレーム変換 (標準アルゴリズム) ---
+// nominal: 表示レート (30) / 実レートは 29.97
+// 戻り値は「表示カウント」(ドロップ補正済み)。表示は nominal で単純分解できる
+function secondsToFramesDF(sec, nominal) {
+  const real = nominal * 0.999;          // 29.97
+  const dropFrames = 2;
+  const per10 = nominal * 600;           // 18000
+  const perMin = nominal * 60;           // 1800
+  let fn = Math.round(sec * real);       // 実フレーム数
+  const d = Math.floor(fn / per10);
+  const m = fn % per10;
+  fn += (m > dropFrames)
+    ? dropFrames * 9 * d + dropFrames * Math.floor(m / perMin)
+    : dropFrames * 9 * d;
+  return fn;
+}
 
-  function mod(a,n){ return ((a % n) + n) % n; }
-
-  function framesToTimecodeNDF(totalFrames, round){
-    const framesPerDay = round*3600*24;
-    const tf = mod(totalFrames, framesPerDay);
-    const f = tf % round;
-    const s = Math.floor(tf/round) % 60;
-    const m = Math.floor(tf/(round*60)) % 60;
-    const h = Math.floor(tf/(round*3600)) % 24;
-    return {h,m,s,f};
+function framesToSecondsDF(count, nominal) {
+  const real = nominal * 0.999;          // 29.97
+  const dropFrames = 2;
+  const per10 = nominal * 600;           // 18000
+  const perMin = nominal * 60;           // 1800
+  const d = Math.floor(count / per10);
+  const m = count % per10;
+  let fn;
+  if (m > dropFrames) {
+    fn = count - dropFrames * 9 * d - dropFrames * Math.floor((m - dropFrames) / perMin);
+  } else {
+    fn = count - dropFrames * 9 * d;
   }
+  return fn / real;
+}
 
-  function framesToTimecodeDF(totalFrames, round){
-    const dropFrames = round === 60 ? 4 : 2;
-    const framesPer24Hours = round*3600*24;
-    let tf = mod(totalFrames, framesPer24Hours);
+function secondsToTC(sec) {
+  const { fps, nominal, drop } = fpsInfo();
+  sec = Math.max(0, sec);
+  // DF: ドロップ補正済みの表示カウント / 非DF: 実フレーム数 (fps === nominal)
+  const f = drop ? secondsToFramesDF(sec, nominal) : Math.round(sec * fps);
+  const ff = f % nominal;
+  const totalSec = Math.floor(f / nominal);
+  const ss = totalSec % 60;
+  const mm = Math.floor(totalSec / 60) % 60;
+  const hh = Math.floor(totalSec / 3600);
+  const p = n => String(n).padStart(2, "0");
+  return { hh: p(hh), mm: p(mm), ss: p(ss), ff: p(ff), frames: f };
+}
 
-    const framesPer10Min = round*600;
-    const framesPerMinute = round*60 - dropFrames;
-
-    const d = Math.floor(tf / framesPer10Min);
-    const m10 = tf % framesPer10Min;
-
-    let adj;
-    if (m10 > dropFrames) {
-      adj = tf + dropFrames*9*d + dropFrames*Math.floor((m10 - dropFrames)/framesPerMinute);
-    } else {
-      adj = tf + dropFrames*9*d;
-    }
-
-    const f = adj % round;
-    const s = Math.floor(adj/round) % 60;
-    const m = Math.floor(adj/(round*60)) % 60;
-    const h = Math.floor(adj/(round*3600)) % 24;
-    return {h,m,s,f};
+function tcToSeconds(tc) {
+  const { fps, nominal, drop } = fpsInfo();
+  const m = tc.trim().match(/^(\d+):(\d{1,2}):(\d{1,2})[;:.](\d{1,3})$/);
+  if (m) {
+    const [, hh, mm, ss, ff] = m;
+    const frames = (+hh * 3600 + +mm * 60 + +ss) * nominal + +ff; // 「表示上の」フレーム数
+    return drop ? framesToSecondsDF(frames, nominal) : frames / fps;
   }
+  const s = tc.trim().match(/^([\d.]+)\s*s$/i);
+  if (s) return parseFloat(s[1]);
+  return null;
+}
 
-  function timecodeToFrames(tc, round, df){
-    if (df){
-      const dropFrames = round === 60 ? 4 : 2;
-      const totalMinutes = 60*tc.h + tc.m;
-      return (round*3600*tc.h) + (round*60*tc.m) + (round*tc.s) + tc.f
-             - dropFrames*(totalMinutes - Math.floor(totalMinutes/10));
-    }
-    return (round*3600*tc.h) + (round*60*tc.m) + (round*tc.s) + tc.f;
-  }
+function renderTC(sec) {
+  const tc = secondsToTC(sec);
+  document.getElementById("display").innerHTML =
+    `${tc.hh}:${tc.mm}:${tc.ss}<span class="frames">:${tc.ff}</span>`;
+  document.getElementById("display").classList.toggle("running", running);
+}
 
-  function framesToTC(totalFrames, round, df){
-    return df ? framesToTimecodeDF(totalFrames, round) : framesToTimecodeNDF(totalFrames, round);
-  }
+/* ===================== ストップウォッチ ===================== */
 
-  function formatTC(tc, df){
-    const sep = df ? ";" : ":";
-    return `${pad2(tc.h)}:${pad2(tc.m)}:${pad2(tc.s)}${sep}${pad2(tc.f)}`;
-  }
+let running = false;
+let startTime = 0;      // performance.now()
+let elapsed = 0;        // 停止中の累積 (秒)
+let rafId = null;
 
-  function parseTCInput(str, round){
-    const digits = (str.replace(/\D/g,"")).padStart(8,"0").slice(-8);
-    let h = +digits.slice(0,2);
-    let m = +digits.slice(2,4);
-    let s = +digits.slice(4,6);
-    let f = +digits.slice(6,8);
-    h = Math.min(h,23);
-    m = Math.min(m,59);
-    s = Math.min(s,59);
-    f = Math.min(f, round-1);
-    return {h,m,s,f};
-  }
+const startBtn = document.getElementById("startBtn");
+const lapBtn = document.getElementById("lapBtn");
+const resetBtn = document.getElementById("resetBtn");
 
-  // ---- UI: fps dropdown ----
-  const fpsSelect = document.getElementById("fpsSelect");
-  FPS_KEYS.forEach(key=>{
-    const opt = document.createElement("option");
-    opt.value = key;
-    opt.textContent = key + " fps";
-    if (key === state.fpsKey) opt.selected = true;
-    fpsSelect.appendChild(opt);
-  });
-  fpsSelect.addEventListener("change", ()=>{
-    if (controlsLocked()){ fpsSelect.value = state.fpsKey; return; }
-    state.fpsKey = fpsSelect.value;
-    if (!FPS_TABLE[state.fpsKey].dfAllowed) state.df = false;
-    refreshFpsUI();
-    renderCalcDefaults();
-    renderStopwatch();
-  });
+function currentElapsed() {
+  return elapsed + (running ? (performance.now() - startTime) / 1000 : 0);
+}
 
-  function refreshFpsUI(){
-    fpsSelect.value = state.fpsKey;
-    const cfg = FPS_TABLE[state.fpsKey];
-    const toggle = document.getElementById("dfToggle");
-    toggle.classList.toggle("on", state.df);
-    toggle.classList.toggle("disabled", !cfg.dfAllowed);
-    document.getElementById("lblNDF").classList.toggle("on", !state.df);
-    document.getElementById("lblDF").classList.toggle("on", state.df);
-    document.getElementById("dfNote").textContent = cfg.dfAllowed
-      ? "この周波数はドロップフレームに対応しています"
-      : "ドロップフレームは 29.97 / 59.94 fps でのみ使用可能";
-    const label = `${state.fpsKey} fps ${state.df ? "DF" : "NDF"}`;
-    document.getElementById("statusFps").textContent = label;
-    document.getElementById("footFps").textContent =
-      `${state.fpsKey} fps · ${state.df ? "DROP FRAME" : "NON-DROP FRAME"}`;
-  }
+function tick() {
+  renderTC(currentElapsed());
+  rafId = requestAnimationFrame(tick);
+}
 
-  document.getElementById("dfToggle").addEventListener("click", ()=>{
-    if (controlsLocked()) return;
-    const cfg = FPS_TABLE[state.fpsKey];
-    if (!cfg.dfAllowed) return;
-    state.df = !state.df;
-    refreshFpsUI();
-    renderStopwatch();
-  });
-
-  // ---- Tabs ----
-  document.querySelectorAll(".tab-btn").forEach(tab=>{
-    tab.addEventListener("click", ()=>{
-      document.querySelectorAll(".tab-btn").forEach(t=>t.classList.remove("active"));
-      document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById("view-"+tab.dataset.tab).classList.add("active");
-    });
-  });
-
-  // ---- Stopwatch engine ----
-  let running = false;
-  let accumulatedMs = 0;
-  let startTs = null;
-  let rafId = null;
-  let lastTotalFrames = 0;
-  let laps = [];
-
-  function controlsLocked(){
-    return running || accumulatedMs > 0;
-  }
-
-  function currentElapsedMs(){
-    return accumulatedMs + (running ? performance.now() - startTs : 0);
-  }
-
-  function renderStopwatch(){
-    const cfg = FPS_TABLE[state.fpsKey];
-    const elapsedSec = currentElapsedMs()/1000;
-    const totalFrames = Math.floor(elapsedSec * cfg.exact);
-    lastTotalFrames = totalFrames;
-    const tc = framesToTC(totalFrames, cfg.round, state.df);
-    const str = formatTC(tc, state.df);
-    document.getElementById("swDisplay").innerHTML =
-      str.replace(/([:;])/g, '<span class="sep">$1</span>');
-
-    const dot = document.getElementById("statusDot");
-    dot.classList.toggle("run", running);
-    dot.classList.toggle("stop", !running);
-    document.getElementById("statusText").textContent = running ? "RUNNING" : (accumulatedMs>0 ? "PAUSED" : "STOPPED");
-
-    document.getElementById("controlRow").classList.toggle("locked", controlsLocked());
-  }
-
-  function tick(){
-    renderStopwatch();
-    if (running) rafId = requestAnimationFrame(tick);
-  }
-
-  function updateTransportButtons(){
-    const btnLeft = document.getElementById("btnLeft");
-    const btnRight = document.getElementById("btnRight");
-    if (running){
-      btnLeft.textContent = "LAP";
-      btnLeft.disabled = false;
-      btnRight.textContent = "STOP";
-      btnRight.className = "btn btn-stop";
-    } else if (accumulatedMs > 0){
-      btnLeft.textContent = "RESET";
-      btnLeft.disabled = false;
-      btnRight.textContent = "START";
-      btnRight.className = "btn btn-go";
-    } else {
-      btnLeft.textContent = "LAP";
-      btnLeft.disabled = true;
-      btnRight.textContent = "START";
-      btnRight.className = "btn btn-go";
-    }
-  }
-
-  document.getElementById("btnRight").addEventListener("click", ()=>{
-    if (running){
-      // STOP
-      accumulatedMs = currentElapsedMs();
-      running = false;
-      cancelAnimationFrame(rafId);
-    } else {
-      // START / RESUME
-      running = true;
-      startTs = performance.now();
-      rafId = requestAnimationFrame(tick);
-    }
-    updateTransportButtons();
-    refreshFpsUI();
-    renderStopwatch();
-  });
-
-  document.getElementById("btnLeft").addEventListener("click", ()=>{
-    if (running){
-      recordLap();
-    } else {
-      resetStopwatch();
-    }
-  });
-
-  function recordLap(){
-    const cfg = FPS_TABLE[state.fpsKey];
-    const elapsedSec = currentElapsedMs()/1000;
-    const totalFrames = Math.floor(elapsedSec * cfg.exact);
-    const prevTotal = laps.length ? laps[0].totalFrames : 0;
-    const splitFrames = totalFrames - prevTotal;
-    const tcStr = formatTC(framesToTC(totalFrames, cfg.round, state.df), state.df);
-    const splitStr = formatTC(framesToTC(splitFrames, cfg.round, state.df), state.df);
-    laps.unshift({ n: laps.length+1, totalFrames, tcStr, splitStr });
-    renderLaps();
-  }
-
-  function resetStopwatch(){
+startBtn.addEventListener("click", () => {
+  if (running) {
+    elapsed = currentElapsed();
     running = false;
     cancelAnimationFrame(rafId);
-    accumulatedMs = 0;
-    startTs = null;
-    laps = [];
-    renderLaps();
-    updateTransportButtons();
-    refreshFpsUI();
-    renderStopwatch();
+    startBtn.textContent = "スタート";
+    startBtn.classList.add("primary");
+    lapBtn.disabled = true;
+  } else {
+    startTime = performance.now();
+    running = true;
+    tick();
+    startBtn.textContent = "ストップ";
+    startBtn.classList.remove("primary");
+    lapBtn.disabled = false;
   }
+  resetBtn.disabled = false;
+  renderTC(currentElapsed());
+});
 
-  function renderLaps(){
-    const body = document.getElementById("lapsBody");
-    const empty = document.getElementById("lapsEmpty");
-    const table = document.getElementById("lapsTable");
-    document.getElementById("lapCount").textContent = laps.length + " laps";
-    if (laps.length === 0){
-      table.style.display = "none";
-      empty.style.display = "block";
-      return;
+lapBtn.addEventListener("click", () => {
+  const sec = currentElapsed();
+  const tc = secondsToTC(sec);
+  const row = document.createElement("div");
+  row.className = "lap";
+  const n = document.querySelectorAll(".lap").length + 1;
+  const prev = lapBtn._last || 0;
+  const split = secondsToTC(sec - prev);
+  lapBtn._last = sec;
+  row.innerHTML = `<span>#${n}</span><b>${tc.hh}:${tc.mm}:${tc.ss}:${tc.ff}</b>` +
+    `<span class="split">+${split.hh}:${split.mm}:${split.ss}:${split.ff}</span>`;
+  document.getElementById("laps").prepend(row);
+});
+
+resetBtn.addEventListener("click", () => {
+  running = false;
+  cancelAnimationFrame(rafId);
+  elapsed = 0;
+  lapBtn._last = 0;
+  startBtn.textContent = "スタート";
+  startBtn.classList.add("primary");
+  lapBtn.disabled = true;
+  resetBtn.disabled = true;
+  document.getElementById("laps").innerHTML = "";
+  renderTC(0);
+});
+
+document.getElementById("fpsSelect").addEventListener("change", () => renderTC(currentElapsed()));
+document.getElementById("dropCheck").addEventListener("change", () => renderTC(currentElapsed()));
+
+/* ===================== 電卓 ===================== */
+
+const display = document.getElementById("calcDisplay");
+const history = document.getElementById("calcHistory");
+
+const keys = [
+  ["7","8","9",":","⌫","C"],
+  ["4","5","6","+","*","h"],
+  ["1","2","3","-","/","m"],
+  ["0","s","f","=","",""],
+];
+const keypad = document.getElementById("keypad");
+keys.flat().forEach(k => {
+  if (k === "") return;
+  const b = document.createElement("button");
+  b.textContent = k;
+  b.className = "secondary" +
+    (["+","-","*","/","×","÷"].includes(k) ? " op" : "") +
+    (k === "=" ? " eq" : "") +
+    (k === "C" ? " clear" : "");
+  b.addEventListener("click", () => pressKey(k));
+  keypad.appendChild(b);
+});
+
+function pressKey(k) {
+  if (k === "C") { display.value = ""; display.focus(); return; }
+  if (k === "⌫") { display.value = display.value.slice(0, -1); display.focus(); return; }
+  if (k === "=") { evaluate(); return; }
+  const val = k === "−" ? "-" : k;
+  const s = display.selectionStart ?? display.value.length;
+  display.value = display.value.slice(0, s) + val + display.value.slice(display.selectionEnd ?? s);
+  display.focus();
+  display.setSelectionRange(s + val.length, s + val.length);
+}
+
+function displayFps() {
+  const { fps, nominal, drop } = fpsInfo();
+  return drop ? nominal : fps; // 1フレームあたりの描画面のfps
+}
+
+// 複合単位 "1m2s15f" "5s20f" "1h30m" を秒に変換
+function durationToSeconds(str) {
+  const re = /(\d+(?:\.\d+)?)\s*([hmsf])/gi;
+  const fp = displayFps();
+  let sec = 0, hit = false, m;
+  while ((m = re.exec(str)) !== null) {
+    hit = true;
+    const v = parseFloat(m[1]);
+    switch (m[2].toLowerCase()) {
+      case "h": sec += v * 3600; break;
+      case "m": sec += v * 60;   break;
+      case "s": sec += v;        break;
+      case "f": sec += v / fp;   break;
     }
-    table.style.display = "table";
-    empty.style.display = "none";
-    body.innerHTML = laps.map(l=>`
-      <tr>
-        <td>${String(l.n).padStart(2,"0")}</td>
-        <td>${l.tcStr}</td>
-        <td>${l.splitStr}</td>
-      </tr>
-    `).join("");
+  }
+  return hit ? sec : null;
+}
+
+// トークン分割: タイムコード / 複合単位 / 単一単位 / スカラー / 演算子
+function tokenize(str) {
+  const tokens = [];
+  const re = /\s*(\d+:\d{1,2}:\d{1,2}[;:.]\d{1,3}|(?:\d+(?:\.\d+)?\s*[hmsf]\s*)+|\d+(?:\.\d+)?|[-+×÷*/])\s*/gi;
+  str = str.replace(/[ー−–—]/g, "-");
+  let m;
+  while ((m = re.exec(str)) !== null) tokens.push(m[1].trim());
+  return tokens;
+}
+
+const isOp = t => /^[+\-×÷*/]$/.test(t);
+
+function evaluate() {
+  const tokens = tokenize(display.value);
+  if (!tokens.length) return;
+
+  // 値 (秒) と演算子の交互列として評価
+  // 文法: 値 (op 値)*   op ∈ {+,-,×,÷}   値の後の ×/÷ は右辺がスカラーのときのみ有効
+  let i = 0;
+  let err = null;
+  let acc = parseValue(tokens[i++]);
+  if (acc === null) { showError(); return; }
+
+  while (i < tokens.length && !err) {
+    let op, v;
+    if (isOp(tokens[i])) {
+      op = tokens[i++];
+      v = parseValue(tokens[i++]);
+      if (v === null) { err = true; break; }
+    } else {
+      op = "+";                       // 演算子を挟まず値が続いたら加算 (1m2s15f など)
+      v = parseValue(tokens[i++]);
+      if (v === null) { err = true; break; }
+    }
+    switch (op) {
+      case "+": acc += v; break;
+      case "-": case "−": acc -= v; break;
+      case "×": case "*": acc *= v; break;
+      case "÷": case "/":
+        if (v === 0) { err = "0で割れません"; } else acc /= v;
+        break;
+      default: err = true;
+    }
+    if (err) break;
   }
 
-  // ---- Calculator ----
-  function currentCfg(){ return FPS_TABLE[state.fpsKey]; }
-
-  document.getElementById("btnCalc").addEventListener("click", ()=>{
-    const cfg = currentCfg();
-    const a = parseTCInput(document.getElementById("tcA").value, cfg.round);
-    const b = parseTCInput(document.getElementById("tcB").value, cfg.round);
-    document.getElementById("tcA").value = formatTC(a, state.df);
-    document.getElementById("tcB").value = formatTC(b, state.df);
-    const fa = timecodeToFrames(a, cfg.round, state.df);
-    const fb = timecodeToFrames(b, cfg.round, state.df);
-    const op = document.getElementById("opSelect").value;
-    const resultFrames = op === "+" ? fa+fb : fa-fb;
-    const wrapped = mod(resultFrames, cfg.round*3600*24);
-    const tc = framesToTC(wrapped, cfg.round, state.df);
-    document.getElementById("calcResultTC").textContent = formatTC(tc, state.df);
-    const seconds = wrapped / cfg.exact;
-    document.getElementById("calcResultSub").textContent =
-      `${wrapped} frames · ${seconds.toFixed(3)}s · ${state.fpsKey} fps ${state.df?"DF":"NDF"}`;
-  });
-
-  document.getElementById("btnF2T").addEventListener("click", ()=>{
-    const cfg = currentCfg();
-    let frames = parseInt(document.getElementById("framesIn").value, 10);
-    if (isNaN(frames)) frames = 0;
-    const wrapped = mod(frames, cfg.round*3600*24);
-    const tc = framesToTC(wrapped, cfg.round, state.df);
-    document.getElementById("f2tResult").textContent = formatTC(tc, state.df);
-  });
-
-  document.getElementById("btnT2F").addEventListener("click", ()=>{
-    const cfg = currentCfg();
-    const tc = parseTCInput(document.getElementById("tcIn").value, cfg.round);
-    document.getElementById("tcIn").value = formatTC(tc, state.df);
-    const frames = timecodeToFrames(tc, cfg.round, state.df);
-    document.getElementById("t2fResult").textContent = frames;
-    document.getElementById("t2fSub").textContent = `実時間 ${(frames/cfg.exact).toFixed(3)}s`;
-  });
-
-  function renderCalcDefaults(){
-    const cfg = currentCfg();
-    ["tcA","tcB","tcIn"].forEach(id=>{
-      const el = document.getElementById(id);
-      const tc = parseTCInput(el.value, cfg.round);
-      el.value = formatTC(tc, state.df);
-    });
+  if (err !== null) {
+    history.prepend(makeHist(display.value, err === true ? "式エラー" : err, true));
+    return;
   }
+  const neg = acc < 0;
+  const tc = secondsToTC(Math.abs(acc));
+  const sign = neg ? "−" : "";
+  history.prepend(makeHist(display.value, `${sign}${tc.hh}:${tc.mm}:${tc.ss}:${tc.ff}`));
+  display.value = `${sign}${tc.hh}:${tc.mm}:${tc.ss}:${tc.ff}`;
+}
 
-  // ---- init ----
-  refreshFpsUI();
-  updateTransportButtons();
-  renderStopwatch();
-  renderLaps();
-})();
+function parseValue(tok) {
+  if (/^(?:\d+(?:\.\d+)?\s*[hmsf]\s*)+$/i.test(tok)) return durationToSeconds(tok);
+  if (/^\d+(?:\.\d+)?$/.test(tok)) return parseFloat(tok); // スカラー (×2, ÷2 など)
+  return tcToSeconds(tok);
+}
+
+function makeHist(expr, result, isError) {
+  const div = document.createElement("div");
+  div.innerHTML = isError
+    ? `<span style="color:var(--danger)">${escapeHtml(expr)} = ${escapeHtml(result)}</span>`
+    : `${escapeHtml(expr)} = <b>${result}</b>`;
+  div.addEventListener("click", () => { display.value = result; display.focus(); });
+  return div;
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+
+function showError() {
+  history.prepend(makeHist(display.value, "入力エラー", true));
+}
+
+display.addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); evaluate(); }
+});
+
+renderTC(0);
 </script>
 </body>
 </html>
