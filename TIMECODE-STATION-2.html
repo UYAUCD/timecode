@@ -212,7 +212,7 @@
     <div class="calc-history" id="calcHistory"></div>
   </div>
 
-  <footer>フレームは内部で高精度 (performance.now) に計算しています</footer>
+  <footer>フレームは内部で高精度 (performance.now) に計算しています<br>Version 2.05</footer>
 </div>
 
 <script>
@@ -507,6 +507,32 @@ display.addEventListener("keydown", e => {
   if (e.key === "Enter") { e.preventDefault(); evaluate(); }
 });
 
+/* ===================== 画面スリープ防止 ===================== */
+
+let wakeLock = null;
+
+async function requestScreenWakeLock() {
+  if (!("wakeLock" in navigator) || document.visibilityState !== "visible" || wakeLock) return;
+  try {
+    wakeLock = await navigator.wakeLock.request("screen");
+    wakeLock.addEventListener("release", () => {
+      wakeLock = null;
+    });
+  } catch (err) {
+    console.warn("画面スリープ防止を有効にできませんでした:", err);
+  }
+}
+
+// バックグラウンド移行時は自動解除されるため、前面復帰時に再取得する
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") requestScreenWakeLock();
+});
+
+// iOSで最初の要求にユーザー操作が必要な場合にも再試行する
+document.addEventListener("pointerdown", requestScreenWakeLock, { passive: true });
+document.addEventListener("keydown", requestScreenWakeLock);
+
+requestScreenWakeLock();
 renderTC(0);
 </script>
 </body>
